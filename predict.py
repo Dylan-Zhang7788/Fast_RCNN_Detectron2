@@ -57,8 +57,10 @@ for d in ['train','val']:  #注册数据集
     MetadataCatalog.get('balloon_'+d).set(thing_classes=['balloon'])
 
 cfg=get_cfg()
-cfg.OUTPUT_DIR = './temp_model'
-cfg.MODEL.WEIGHTS=os.path.join(cfg.OUTPUT_DIR,'model_final.pth')
+cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")) #预设档，参数
+cfg.MODEL.ROI_HEADS.NUM_CLASSES=1  #一类
+# cfg.MODEL.DEVICE='cpu'  #注释掉此项，系统默认使用NVidia的显卡
+cfg.MODEL.WEIGHTS='./temp_model/model_final.pth'
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST=0.7
 predictor=DefaultPredictor(cfg)
 val_dicts=DatasetCatalog.get('balloon_val')
