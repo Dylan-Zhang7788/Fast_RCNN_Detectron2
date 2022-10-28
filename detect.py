@@ -37,7 +37,7 @@ plt.show()
 
 ##语义分割
 cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"))
-cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST=0.6
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST=0.7
 cfg.MODEL.WEIGHTS=model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")
 predictor=DefaultPredictor(cfg)
 outputs=predictor(im)
@@ -50,7 +50,7 @@ plt.show()
 
 ##体姿骨干
 cfg.merge_from_file(model_zoo.get_config_file("COCO-Keypoints/keypoint_rcnn_R_50_FPN_3x.yaml"))
-cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST=0.7
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST=0.8
 cfg.MODEL.WEIGHTS=model_zoo.get_checkpoint_url("COCO-Keypoints/keypoint_rcnn_R_50_FPN_3x.yaml")
 predictor=DefaultPredictor(cfg)
 outputs=predictor(im)
